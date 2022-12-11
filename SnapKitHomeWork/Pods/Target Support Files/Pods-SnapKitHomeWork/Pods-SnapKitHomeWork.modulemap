@@ -1,0 +1,6 @@
+framework module Pods_SnapKitHomeWork {
+  umbrella header "Pods-SnapKitHomeWork-umbrella.h"
+
+  export *
+  module * { export * }
+}

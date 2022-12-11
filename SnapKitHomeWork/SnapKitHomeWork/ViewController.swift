@@ -13,7 +13,7 @@ class ViewController: UIViewController {
     let mainView: UIView = {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
-        view.backgroundColor = UIColor(cgColor: CGColor(gray: 200/255  , alpha: 0.5))
+        view.backgroundColor = UIColor(displayP3Red: 232/255, green: 235/255, blue: 242/255, alpha: 1.0)
         return view
     }()
     
@@ -38,7 +38,7 @@ class ViewController: UIViewController {
     
     let genderTextField: UITextField = {
         let textField = UITextField()
-        textField.placeholder = "Enter surname"
+        textField.placeholder = "Enter gender"
         return textField
     }()
     
@@ -200,14 +200,10 @@ class ViewController: UIViewController {
     }
     
     @objc func saveButtonPressed() {
-        var name: String = ""
-        var surname: String = ""
-        
+
         if let nameString = nameTextField.text, !nameString.isEmpty ,
            let surnameString  = surnameTextField.text, !surnameString.isEmpty {
-            name = nameString
-            surname = surnameString
-            presentAlert( title: "Success", message: "Name - \(name), Surname - \(surname)", preferredStyle: .alert )
+            presentAlert( title: "Success", message: "Name - \(nameString), Surname - \(surnameString)", preferredStyle: .alert )
         }
     }
     

@@ -10,13 +10,6 @@ import SnapKit
 
 class ViewController: UIViewController {
     
-    let mainView: UIView = {
-        let view = UIView()
-        view.translatesAutoresizingMaskIntoConstraints = false
-        view.backgroundColor = UIColor(displayP3Red: 232/255, green: 235/255, blue: 242/255, alpha: 1.0)
-        return view
-    }()
-    
     let stackView: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .vertical
@@ -118,9 +111,9 @@ class ViewController: UIViewController {
     }
     
     func setupViews() {
-        view.addSubview(mainView)
-        mainView.addSubview(button)
-        mainView.addSubview(stackView)
+       
+        view.addSubview(button)
+        view.addSubview(stackView)
         
         stackView.addArrangedSubview(nameLabel)
         stackView.addArrangedSubview(nameTextField)
@@ -141,9 +134,8 @@ class ViewController: UIViewController {
         stackView.setCustomSpacing(8, after: dateOFBirthLabel)
         stackView.setCustomSpacing(30, after: dateOFBirthTextField)
         stackView.setCustomSpacing(6, after: agreeSwitch)
-        mainView.snp.makeConstraints {
-            $0.leading.bottom.trailing.top.equalToSuperview()
-        }
+
+        view.backgroundColor = UIColor(displayP3Red: 232/255, green: 235/255, blue: 242/255, alpha: 1.0)
         
         button.addTarget(self, action: #selector(saveButtonPressed), for: .primaryActionTriggered)
         
@@ -152,7 +144,7 @@ class ViewController: UIViewController {
         button.snp.makeConstraints {
             $0.height.equalTo(60)
             $0.leading.trailing.equalToSuperview().inset(20)
-            $0.bottom.equalTo(mainView.safeAreaLayoutGuide).offset(-30)
+            $0.bottom.equalTo(view.safeAreaLayoutGuide).offset(-30)
         }
         
         stackView.snp.makeConstraints {

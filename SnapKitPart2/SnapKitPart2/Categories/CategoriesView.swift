@@ -10,6 +10,7 @@ import SnapKit
 
 class CategoriesView: UIView {
     
+    
     let descriptionLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -47,6 +48,19 @@ class CategoriesView: UIView {
         return collectionView
     }()
     
+    var continueButton: UIButton = {
+        let button = UIButton()
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.backgroundColor = .white
+        button.setTitle("Продолжить", for: .normal)
+        button.setTitleColor(UIColor.black, for: .normal)
+        button.titleLabel?.font = UIFont.systemFont(ofSize: 20, weight: .bold)
+        button.layer.masksToBounds = true
+        button.layer.cornerRadius = 40
+        button.isHidden = true
+        return button
+    } ()
+    
     init() {
         super.init(frame: .zero)
         setup()
@@ -60,9 +74,15 @@ class CategoriesView: UIView {
         backgroundColor = .black
         addSubview(headerStackView)
         addSubview(collectionView)
+        addSubview(continueButton)
         headerStackView.addArrangedSubview(descriptionLabel)
         headerStackView.addArrangedSubview(laterButton)
         setConstraints()
+    }
+    
+    func setButton (_ model: Category) {
+       continueButton.isHidden = model.isSelected ? true : false
+    
     }
     
     func setConstraints() {
@@ -80,6 +100,14 @@ class CategoriesView: UIView {
             $0.top.equalTo(headerStackView.snp.bottom).offset(24)
             $0.trailing.leading.equalToSuperview().inset(16)
             $0.bottom.equalTo(safeAreaLayoutGuide).inset(24)
+        }
+        
+        continueButton.snp.makeConstraints {
+                $0.height.equalTo(90)
+            $0.width.equalTo(302)
+                $0.leading.equalToSuperview().offset(80)
+                $0.trailing.equalToSuperview().offset(-80)
+                $0.bottom.equalTo(safeAreaLayoutGuide).offset(-40)
         }
     }
 

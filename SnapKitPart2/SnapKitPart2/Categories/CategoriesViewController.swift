@@ -33,9 +33,7 @@ extension CategoriesViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         dataSourсe[indexPath.row].isSelected.toggle()
         collectionView.reloadItems(at: [indexPath])
-       
     }
-    
 }
 
 extension CategoriesViewController: UICollectionViewDataSource {

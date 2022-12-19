@@ -43,7 +43,7 @@ class CategoryCell: UICollectionViewCell {
         imageView = UIImageView(image: image!)
         return imageView
     } ()
-    
+
     override init(frame: CGRect) {
         super.init(frame: frame)
         setup()

@@ -19,7 +19,6 @@ class CategoryCell: UICollectionViewCell {
         stackView.axis = .horizontal
         stackView.distribution = .fill
         stackView.alignment = .center
-//        stackView.spacing = 12
         return stackView
     }()
     
@@ -37,9 +36,11 @@ class CategoryCell: UICollectionViewCell {
         return view
     } ()
     
-    let iconImageView: UIImageView = {
-      let imageView = UIImageView()
-        imageView.backgroundColor = .red
+    var iconImageView: UIImageView = {
+        var imageView = UIImageView()
+        let imageName = "plus"
+        let image = UIImage(named: imageName)
+        imageView = UIImageView(image: image!)
         return imageView
     } ()
     
@@ -55,6 +56,8 @@ class CategoryCell: UICollectionViewCell {
     func set(_ model: Category) {
         titleLabel.text = model.title
         contentView.backgroundColor = model.isSelected ? .orange : .darkGray
+        viewOnCell.isHidden = model.isSelected ? true : false
+        iconImageView.image  = model.isSelected ?  UIImage(named: "checkmark") : UIImage(named: "plus")
     }
     
     func setup() {
@@ -85,8 +88,7 @@ class CategoryCell: UICollectionViewCell {
         viewOnCell.snp.makeConstraints {
             $0.height.equalTo(20)
             $0.width.equalTo(1)
-//            $0.centerY.equalToSuperview()
-//            $0.leading.equalTo(titleLabel.snp.trailing).inset(5)
+
         }
         
         iconImageView.snp.makeConstraints {

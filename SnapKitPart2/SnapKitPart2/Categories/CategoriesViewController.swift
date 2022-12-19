@@ -9,7 +9,7 @@ import UIKit
 
 class CategoriesViewController: UIViewController {
     
-    var dataSourсe = ["Юмор", "Еда", "Кино", "Рестораны", "Прогулки", "Политика", "Новости",  "Автомобили", "Сериалы", "Рецепты", "Работа", "Отдых", "Спорт", "Спорт", "Политика", "Новости", "Юмор", "Еда", "Кино", "Рестораны", "Прогулки", "Политика", "Новости", "Юмор", "Еда", "Кино"].map { Category(title: $0)}
+    var dataSourсe = ["Юмор", "Еда", "Кино", "Рестораны", "Прогулки", "Политика", "Новости",  "Автомобили", "Сериалы", "Рецепты", "Работа", "Отдых", "Спорт", "Спорт", "Политика", "Новости", "Юмор", "Еда", "Кино", "Рестораны", "Прогулки", "Политика"].map { Category(title: $0)}
     
     override func loadView() {
         super.loadView()
@@ -33,6 +33,7 @@ extension CategoriesViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         dataSourсe[indexPath.row].isSelected.toggle()
         collectionView.reloadItems(at: [indexPath])
+       
     }
     
 }

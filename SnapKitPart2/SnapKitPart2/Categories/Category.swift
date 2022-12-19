@@ -9,6 +9,7 @@ import Foundation
 
 struct Category {
     let title: String
+    let iconImageView: String = ""
     var isSelected = false
 }
 

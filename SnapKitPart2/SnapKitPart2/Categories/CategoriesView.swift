@@ -16,6 +16,7 @@ class CategoriesView: UIView {
         label.font = .systemFont(ofSize: 16)
         label.numberOfLines = 2
         label.text = "Отметьте то, что вам интересно, чтобы настроить Дзен"
+        label.textColor = .gray
         return label
     }()
     
@@ -56,7 +57,7 @@ class CategoriesView: UIView {
     }
     
     func setup() {
-        backgroundColor = .white
+        backgroundColor = .black
         addSubview(headerStackView)
         addSubview(collectionView)
         headerStackView.addArrangedSubview(descriptionLabel)
@@ -81,6 +82,5 @@ class CategoriesView: UIView {
             $0.bottom.equalTo(safeAreaLayoutGuide).inset(24)
         }
     }
-    
-   
+
 }

@@ -9,7 +9,7 @@ import UIKit
 
 class CategoriesViewController: UIViewController {
     
-    var dataSourсe = ["Еда", "Кино", "Рисование", "Свифт", "Учеба", "Работа", "Еда", "Кино", "Сериалы", "Еда", "Кино", "Рисование","Рисование"].map { Category(title: $0)}
+    var dataSourсe = ["Юмор", "Еда", "Кино", "Рестораны", "Прогулки", "Политика", "Новости",  "Автомобили", "Сериалы", "Рецепты", "Работа", "Отдых", "Спорт", "Спорт", "Политика", "Новости", "Юмор", "Еда", "Кино", "Рестораны", "Прогулки", "Политика", "Новости", "Юмор", "Еда", "Кино"].map { Category(title: $0)}
     
     override func loadView() {
         super.loadView()
@@ -54,6 +54,5 @@ extension CategoriesViewController: UICollectionViewDataSource {
 extension CategoriesViewController: UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: dataSourсe[indexPath.row].title.size(withAttributes: [.font: UIFont.systemFont(ofSize: 18, weight: .semibold)]).width + 20, height: 40)
-    }
+        return CGSize(width: dataSourсe[indexPath.row].title.size(withAttributes: [.font: UIFont.systemFont(ofSize: 18, weight: .semibold)]).width + 90, height: 40)}
 }

@@ -32,7 +32,17 @@ extension CategoriesViewController: UICollectionViewDelegate {
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         dataSourсe[indexPath.row].isSelected.toggle()
+        
         collectionView.reloadItems(at: [indexPath])
+       
+        if  dataSourсe[indexPath.row].isSelected {
+            guard let view = view as? CategoriesView else { return }
+            view.continueButton.isHidden = false
+        } else {
+            guard let view = view as? CategoriesView else { return }
+            view.continueButton.isHidden = true
+        }
+
     }
 }
 

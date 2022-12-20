@@ -15,7 +15,7 @@ class CategoriesViewController: UIViewController {
         super.loadView()
         view = CategoriesView()
     }
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupTable()
@@ -35,14 +35,13 @@ extension CategoriesViewController: UICollectionViewDelegate {
         
         collectionView.reloadItems(at: [indexPath])
         
-     if dataSourсe.filter({$0.isSelected
-     }).count > 0 {
-         guard let view = view as? CategoriesView else { return }
-                 view.continueButton.isHidden = false
-     } else {
-         guard let view = view as? CategoriesView else { return }
-                 view.continueButton.isHidden = true
-     }
+        guard let view = view as? CategoriesView else { return }
+        if dataSourсe.filter({$0.isSelected
+        }).count > 0 {
+            view.continueButton.isHidden = false
+        } else {
+            view.continueButton.isHidden = true
+        }
     }
 }
 

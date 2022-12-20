@@ -99,12 +99,12 @@ class CategoriesView: UIView {
         collectionView.snp.makeConstraints {
             $0.top.equalTo(headerStackView.snp.bottom).offset(24)
             $0.trailing.leading.equalToSuperview().inset(16)
-            $0.bottom.equalTo(safeAreaLayoutGuide).inset(24)
+            $0.bottom.equalTo(continueButton.snp.top).inset(-24)
         }
         
         continueButton.snp.makeConstraints {
                 $0.height.equalTo(90)
-            $0.width.equalTo(302)
+                $0.width.equalTo(302)
                 $0.leading.equalToSuperview().offset(80)
                 $0.trailing.equalToSuperview().offset(-80)
                 $0.bottom.equalTo(safeAreaLayoutGuide).offset(-40)

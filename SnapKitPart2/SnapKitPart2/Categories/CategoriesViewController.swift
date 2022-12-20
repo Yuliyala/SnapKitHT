@@ -34,15 +34,15 @@ extension CategoriesViewController: UICollectionViewDelegate {
         dataSourсe[indexPath.row].isSelected.toggle()
         
         collectionView.reloadItems(at: [indexPath])
-       
-        if  dataSourсe[indexPath.row].isSelected {
-            guard let view = view as? CategoriesView else { return }
-            view.continueButton.isHidden = false
-        } else {
-            guard let view = view as? CategoriesView else { return }
-            view.continueButton.isHidden = true
-        }
-
+        
+     if dataSourсe.filter({$0.isSelected
+     }).count > 0 {
+         guard let view = view as? CategoriesView else { return }
+                 view.continueButton.isHidden = false
+     } else {
+         guard let view = view as? CategoriesView else { return }
+                 view.continueButton.isHidden = true
+     }
     }
 }
 

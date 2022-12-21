@@ -56,7 +56,9 @@ class CategoriesView: UIView {
         button.setTitleColor(UIColor.black, for: .normal)
         button.titleLabel?.font = UIFont.systemFont(ofSize: 22, weight: .bold)
         button.layer.cornerRadius = 40
-        button.isHidden = true
+//        button.isHidden = true
+        button.alpha = 0
+        button.isEnabled = false
         return button
     } ()
     
@@ -80,8 +82,14 @@ class CategoriesView: UIView {
     }
     
     func showButton(isVisible: Bool) {
+        // проверяем надо ли делать анимацию
+        if continueButton.isEnabled == isVisible { return }
         continueButton.isEnabled = isVisible
-        continueButton.alpha = 
+        // Делаем анимацию
+        
+        UIView.animate(withDuration: 3, delay: 0, options: .curveLinear) {
+            self.continueButton.alpha = isVisible ? 1 : 0
+        }
     }
     
     func setConstraints() {

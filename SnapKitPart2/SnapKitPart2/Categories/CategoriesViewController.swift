@@ -32,7 +32,10 @@ class CategoriesViewController: UIViewController {
     }
     
     func showHideButton() {
-        rootView.continueButton.isHidden = !dataSourсe.contains{ $0.isSelected}
+        //прятание кнопки через isHidden
+//        rootView.continueButton.isHidden = !dataSourсe.contains{ $0.isSelected}
+        
+        rootView.showButton(isVisible: dataSourсe.contains{ $0.isSelected})
     }
 }
 

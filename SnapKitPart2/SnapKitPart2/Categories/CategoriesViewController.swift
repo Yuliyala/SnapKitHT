@@ -9,13 +9,13 @@ import UIKit
 
 class CategoriesViewController: UIViewController {
     
-    var dataSourсe = ["Еда", "Кино", "Рисование", "Свифт", "Учеба", "Работа", "Еда", "Кино", "Сериалы", "Еда", "Кино", "Рисование","Рисование"].map { Category(title: $0)}
+    var dataSourсe = ["Юмор", "Еда", "Кино", "Рестораны", "Прогулки", "Политика", "Новости",  "Автомобили", "Сериалы", "Рецепты", "Работа", "Отдых", "Спорт", "Спорт", "Политика", "Новости", "Юмор", "Еда", "Кино", "Рестораны", "Прогулки", "Политика"].map { Category(title: $0)}
     
     override func loadView() {
         super.loadView()
         view = CategoriesView()
     }
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupTable()
@@ -32,9 +32,17 @@ extension CategoriesViewController: UICollectionViewDelegate {
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         dataSourсe[indexPath.row].isSelected.toggle()
+        
         collectionView.reloadItems(at: [indexPath])
+        
+        guard let view = view as? CategoriesView else { return }
+        if dataSourсe.filter({$0.isSelected
+        }).count > 0 {
+            view.continueButton.isHidden = false
+        } else {
+            view.continueButton.isHidden = true
+        }
     }
-    
 }
 
 extension CategoriesViewController: UICollectionViewDataSource {
@@ -54,6 +62,5 @@ extension CategoriesViewController: UICollectionViewDataSource {
 extension CategoriesViewController: UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: dataSourсe[indexPath.row].title.size(withAttributes: [.font: UIFont.systemFont(ofSize: 18, weight: .semibold)]).width + 20, height: 40)
-    }
+        return CGSize(width: dataSourсe[indexPath.row].title.size(withAttributes: [.font: UIFont.systemFont(ofSize: 18, weight: .semibold)]).width + 90, height: 40)}
 }

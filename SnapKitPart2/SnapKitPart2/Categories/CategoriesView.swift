@@ -54,8 +54,7 @@ class CategoriesView: UIView {
         button.backgroundColor = .white
         button.setTitle("Продолжить", for: .normal)
         button.setTitleColor(UIColor.black, for: .normal)
-        button.titleLabel?.font = UIFont.systemFont(ofSize: 20, weight: .bold)
-        button.layer.masksToBounds = true
+        button.titleLabel?.font = UIFont.systemFont(ofSize: 22, weight: .bold)
         button.layer.cornerRadius = 40
         button.isHidden = true
         return button
@@ -80,9 +79,9 @@ class CategoriesView: UIView {
         setConstraints()
     }
     
-    func setButton (_ model: Category) {
-       continueButton.isHidden = model.isSelected ? true : false
-    
+    func showButton(isVisible: Bool) {
+        continueButton.isEnabled = isVisible
+        continueButton.alpha = 
     }
     
     func setConstraints() {
@@ -103,12 +102,11 @@ class CategoriesView: UIView {
         }
         
         continueButton.snp.makeConstraints {
-                $0.height.equalTo(90)
-                $0.width.equalTo(302)
-                $0.leading.equalToSuperview().offset(80)
-                $0.trailing.equalToSuperview().offset(-80)
-                $0.bottom.equalTo(safeAreaLayoutGuide).offset(-40)
+            $0.height.equalTo(90)
+            $0.width.equalTo(280)
+            $0.centerX.equalToSuperview()
+            $0.bottom.equalTo(safeAreaLayoutGuide).offset(-40)
         }
     }
-
+    
 }

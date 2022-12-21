@@ -10,6 +10,10 @@ import UIKit
 class CategoriesViewController: UIViewController {
     
     var dataSourсe = ["Юмор", "Еда", "Кино", "Рестораны", "Прогулки", "Политика", "Новости",  "Автомобили", "Сериалы", "Рецепты", "Работа", "Отдых", "Спорт", "Спорт", "Политика", "Новости", "Юмор", "Еда", "Кино", "Рестораны", "Прогулки", "Политика"].map { Category(title: $0)}
+    //Переменная для получения приведенной  view, чтоб не делать приведение каждый раз
+    var rootView: CategoriesView {
+        view as! CategoriesView //выполняем приведение типа
+    }
     
     override func loadView() {
         super.loadView()
@@ -22,9 +26,13 @@ class CategoriesViewController: UIViewController {
     }
     
     func setupTable() {
-        guard let view = view as? CategoriesView else { return } // выполняем приведение к типу
-        view.collectionView.delegate = self
-        view.collectionView.dataSource = self
+        
+        rootView.collectionView.delegate = self
+        rootView.collectionView.dataSource = self
+    }
+    
+    func showHideButton() {
+        rootView.continueButton.isHidden = !dataSourсe.contains{ $0.isSelected}
     }
 }
 
@@ -32,16 +40,8 @@ extension CategoriesViewController: UICollectionViewDelegate {
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         dataSourсe[indexPath.row].isSelected.toggle()
-        
         collectionView.reloadItems(at: [indexPath])
-        
-        guard let view = view as? CategoriesView else { return }
-        if dataSourсe.filter({$0.isSelected
-        }).count > 0 {
-            view.continueButton.isHidden = false
-        } else {
-            view.continueButton.isHidden = true
-        }
+        showHideButton()
     }
 }
 
@@ -62,5 +62,5 @@ extension CategoriesViewController: UICollectionViewDataSource {
 extension CategoriesViewController: UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: dataSourсe[indexPath.row].title.size(withAttributes: [.font: UIFont.systemFont(ofSize: 18, weight: .semibold)]).width + 90, height: 40)}
+        return CGSize(width: dataSourсe[indexPath.row].title.size(withAttributes: [.font: UIFont.systemFont(ofSize: 18, weight: .semibold)]).width + 76, height: 40)}
 }

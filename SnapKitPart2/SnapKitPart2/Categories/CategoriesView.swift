@@ -42,7 +42,7 @@ class CategoriesView: UIView {
     }()
     
     let collectionView: UICollectionView = {
-        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
+        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: LeftAlignedCollectionViewFlowLayout())
         collectionView.register(CategoryCell.self, forCellWithReuseIdentifier: CategoryCell.identifier)
         collectionView.backgroundColor = .clear
         return collectionView
@@ -87,7 +87,7 @@ class CategoriesView: UIView {
         continueButton.isEnabled = isVisible
         // Делаем анимацию
         
-        UIView.animate(withDuration: 3, delay: 0, options: .curveLinear) {
+        UIView.animate(withDuration: 0.5, delay: 0, options: .curveLinear) {
             self.continueButton.alpha = isVisible ? 1 : 0
         }
     }
@@ -116,5 +116,26 @@ class CategoriesView: UIView {
             $0.bottom.equalTo(safeAreaLayoutGuide).offset(-40)
         }
     }
-    
+}
+
+class LeftAlignedCollectionViewFlowLayout: UICollectionViewFlowLayout {
+
+    override func layoutAttributesForElements(in rect: CGRect) -> [UICollectionViewLayoutAttributes]? {
+        let attributes = super.layoutAttributesForElements(in: rect)
+
+        var leftMargin = sectionInset.left
+        var maxY: CGFloat = -1.0
+        attributes?.forEach { layoutAttribute in
+            if layoutAttribute.frame.origin.y >= maxY {
+                leftMargin = sectionInset.left
+            }
+
+            layoutAttribute.frame.origin.x = leftMargin
+
+            leftMargin += layoutAttribute.frame.width + minimumInteritemSpacing
+            maxY = max(layoutAttribute.frame.maxY , maxY)
+        }
+
+        return attributes
+    }
 }

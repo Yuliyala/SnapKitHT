@@ -19,6 +19,7 @@ class CategoryCell: UICollectionViewCell {
         stackView.axis = .horizontal
         stackView.distribution = .fill
         stackView.alignment = .center
+        stackView.spacing = 12
         return stackView
     }()
     
@@ -30,14 +31,16 @@ class CategoryCell: UICollectionViewCell {
         return label
     }()
     
-    let viewOnCell: UIView = {
+    let separator: UIView = {
       let view = UIView()
+        view.translatesAutoresizingMaskIntoConstraints = false
         view.backgroundColor = .gray
         return view
     } ()
     
     var iconImageView: UIImageView = {
         var imageView = UIImageView()
+        imageView.translatesAutoresizingMaskIntoConstraints = false
         let imageName = "plus"
         let image = UIImage(named: imageName)
         imageView = UIImageView(image: image!)
@@ -56,17 +59,17 @@ class CategoryCell: UICollectionViewCell {
     func set(_ model: Category) {
         titleLabel.text = model.title
         contentView.backgroundColor = model.isSelected ? .orange : .darkGray
-        viewOnCell.isHidden = model.isSelected ? true : false
-        iconImageView.image  = model.isSelected ?  UIImage(named: "checkmark") : UIImage(named: "plus")
+        separator.alpha = model.isSelected ? 0 : 1
+        iconImageView.image = UIImage(named: model.isSelected ? "checkmark" : "plus")
     }
     
     func setup() {
         contentView.addSubview(stackView)
         stackView.addArrangedSubview(titleLabel)
-        stackView.addArrangedSubview(viewOnCell)
+        stackView.addArrangedSubview(separator)
         stackView.addArrangedSubview(iconImageView)
         stackView.setCustomSpacing(16, after: titleLabel)
-        stackView.setCustomSpacing(16, after: viewOnCell)
+        stackView.setCustomSpacing(16, after: separator)
         
         
         contentView.backgroundColor = .darkGray
@@ -80,21 +83,13 @@ class CategoryCell: UICollectionViewCell {
             $0.top.trailing.bottom.leading.equalToSuperview().inset(10)
         }
         
-        titleLabel.snp.makeConstraints {
-            $0.leading.equalToSuperview().inset(8)
-            $0.centerY.equalToSuperview()
-        }
-        
-        viewOnCell.snp.makeConstraints {
+        separator.snp.makeConstraints {
             $0.height.equalTo(20)
             $0.width.equalTo(1)
-
         }
         
         iconImageView.snp.makeConstraints {
-            $0.centerY.equalToSuperview()
-            $0.trailing.equalTo(stackView.snp.leading).inset(10)
-            $0.height.width.equalTo(24)
+            $0.size.equalTo(18)
         }
     }
 }

@@ -42,7 +42,7 @@ class CategoriesView: UIView {
     }()
     
     let collectionView: UICollectionView = {
-        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
+        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: LeftAlignedCollectionViewFlowLayout())
         collectionView.register(CategoryCell.self, forCellWithReuseIdentifier: CategoryCell.identifier)
         collectionView.backgroundColor = .clear
         return collectionView
@@ -54,10 +54,11 @@ class CategoriesView: UIView {
         button.backgroundColor = .white
         button.setTitle("Продолжить", for: .normal)
         button.setTitleColor(UIColor.black, for: .normal)
-        button.titleLabel?.font = UIFont.systemFont(ofSize: 20, weight: .bold)
-        button.layer.masksToBounds = true
+        button.titleLabel?.font = UIFont.systemFont(ofSize: 22, weight: .bold)
         button.layer.cornerRadius = 40
-        button.isHidden = true
+//        button.isHidden = true
+        button.alpha = 0
+        button.isEnabled = false
         return button
     } ()
     
@@ -80,9 +81,15 @@ class CategoriesView: UIView {
         setConstraints()
     }
     
-    func setButton (_ model: Category) {
-       continueButton.isHidden = model.isSelected ? true : false
-    
+    func showButton(isVisible: Bool) {
+        // проверяем надо ли делать анимацию
+        if continueButton.isEnabled == isVisible { return }
+        continueButton.isEnabled = isVisible
+        // Делаем анимацию
+        
+        UIView.animate(withDuration: 0.5, delay: 0, options: .curveLinear) {
+            self.continueButton.alpha = isVisible ? 1 : 0
+        }
     }
     
     func setConstraints() {
@@ -103,12 +110,32 @@ class CategoriesView: UIView {
         }
         
         continueButton.snp.makeConstraints {
-                $0.height.equalTo(90)
-                $0.width.equalTo(302)
-                $0.leading.equalToSuperview().offset(80)
-                $0.trailing.equalToSuperview().offset(-80)
-                $0.bottom.equalTo(safeAreaLayoutGuide).offset(-40)
+            $0.height.equalTo(90)
+            $0.width.equalTo(280)
+            $0.centerX.equalToSuperview()
+            $0.bottom.equalTo(safeAreaLayoutGuide).offset(-40)
         }
     }
+}
 
+class LeftAlignedCollectionViewFlowLayout: UICollectionViewFlowLayout {
+
+    override func layoutAttributesForElements(in rect: CGRect) -> [UICollectionViewLayoutAttributes]? {
+        let attributes = super.layoutAttributesForElements(in: rect)
+
+        var leftMargin = sectionInset.left
+        var maxY: CGFloat = -1.0
+        attributes?.forEach { layoutAttribute in
+            if layoutAttribute.frame.origin.y >= maxY {
+                leftMargin = sectionInset.left
+            }
+
+            layoutAttribute.frame.origin.x = leftMargin
+
+            leftMargin += layoutAttribute.frame.width + minimumInteritemSpacing
+            maxY = max(layoutAttribute.frame.maxY , maxY)
+        }
+
+        return attributes
+    }
 }

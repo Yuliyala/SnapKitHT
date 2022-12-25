@@ -26,13 +26,18 @@ class ViewController: UIViewController {
         return button
     }()
     
-    var textField: CustomTextField = {
+    var nameTextField: CustomTextField = {
         let textField = CustomTextField()
         textField.placeholder = "Name"
         return  textField
-        
     }()
     
+    var surnameTextField: CustomTextField = {
+        let textField = CustomTextField()
+        textField.placeholder = "Surname"
+        return  textField
+        
+    }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -43,6 +48,9 @@ class ViewController: UIViewController {
     func setup() {
         view.addSubview(button)
         view.addSubview(button2)
+        view.addSubview(nameTextField)
+        view.addSubview(surnameTextField)
+        
         
         button.snp.makeConstraints {
             $0.bottom.equalTo(view.safeAreaLayoutGuide).inset(32)
@@ -56,6 +64,18 @@ class ViewController: UIViewController {
             $0.centerX.equalToSuperview()
             $0.width.equalTo(250)
             $0.height.equalTo(64)
+        }
+        
+        nameTextField.snp.makeConstraints {
+            $0.top.equalTo(view.safeAreaLayoutGuide).offset(50)
+            $0.leading.trailing.equalToSuperview().inset(20)
+            $0.height.equalTo(45)
+        }
+        
+        surnameTextField.snp.makeConstraints {
+            $0.top.equalTo(nameTextField.snp.bottom).offset(50)
+            $0.leading.trailing.equalToSuperview().inset(20)
+            $0.height.equalTo(45)
         }
     }
 

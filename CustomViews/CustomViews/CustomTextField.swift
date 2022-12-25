@@ -9,22 +9,25 @@ import UIKit
 
 class CustomTextField: UITextField {
     
-//    var enabledBackground: UIColor = .lightGray {
-//        didSet {
-//            backgroundColor = isEnabled ? enabledBackground : disabledBackground as! UIColor
-//        }
-//    }
     
  
     init() {
     super.init(frame: .zero)
+        setup()
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
-    
-    
+    func setup() {
+        backgroundColor =  .white
+        layer.masksToBounds = true
+        layer.borderColor = UIColor.orange.cgColor
+        layer.borderWidth = 2
+        layer.cornerRadius = 8
+        leftView = UIView(frame: CGRect(x: 0, y: 0, width: 16, height: 0))
+        leftViewMode = .always
+    }
     
 }

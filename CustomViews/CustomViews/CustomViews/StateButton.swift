@@ -9,7 +9,7 @@ import UIKit
 
 class StateButton: UIButton {
 
-    // Переменная отвчеающая за стиль
+    // Переменная отвечающая за стиль
     var style: ButtonStyle = .primary {
         // При изменении вызываем метод, который настраивает кнопку и ее стили
         didSet {
